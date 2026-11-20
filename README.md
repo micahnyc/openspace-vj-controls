@@ -26,6 +26,10 @@ Start OpenSpace with its WebSocket server on (default port 4682). If the app run
 
 **Windows note:** run `npm test` from a path with an uppercase drive letter (`C:\...`). With a lowercase one (`c:\...`, as VS Code sometimes opens folders) Vitest loads twice and every test fails.
 
+## Privacy
+
+The app makes no third-party requests: fonts (Barlow, Barlow Condensed, Big Shoulders Display, JetBrains Mono, all SIL Open Font License) are bundled from [Fontsource](https://fontsource.org/), and there is no analytics. It talks only to the OpenSpace instance you point it at. Settings and autosaved mappings stay in your browser's local storage.
+
 ## Audio input
 
 Pick an input under **Tempo & EQ**. Options on Windows, best first for shows:
