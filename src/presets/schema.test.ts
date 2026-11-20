@@ -84,3 +84,10 @@ describe('listScripts', () => {
     expect(listScripts(file).map((s) => s.script)).toEqual(['openspace.printInfo(1)', 'a()', 'b()']);
   });
 });
+
+describe('palette panel gray', () => {
+  it('keeps a saved panel gray and ignores an invalid one', () => {
+    expect(migrate({ schemaVersion: 1, palette: { name: 'Mine', colors: ['#111111', '#222222', '#333333', '#444444'], panel: '#181820' } }).palette.panel).toBe('#181820');
+    expect(migrate({ schemaVersion: 1, palette: { name: 'Mine', colors: ['#111111', '#222222', '#333333', '#444444'], panel: 'grey' } }).palette.panel).toBeUndefined();
+  });
+});

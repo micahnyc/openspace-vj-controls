@@ -150,6 +150,16 @@ button:disabled {
   cursor: default;
 }
 
+/* Native dropdown lists: palette colors instead of the browser's gray. */
+select option,
+select optgroup {
+  background: var(--raised);
+  color: var(--ink);
+}
+select optgroup {
+  color: var(--ink-muted);
+}
+
 input[type='text'],
 input[type='number'],
 input[type='search'],
@@ -193,7 +203,9 @@ select {
 
 /* Panel with corner ticks */
 .panel {
-  background: var(--panel);
+  /* Outlined, not filled: panels sit on ground and are framed by a hairline in the panel color. */
+  background: transparent;
+  border: var(--stroke-hair) solid var(--panel);
   padding: var(--space-3);
   position: relative;
   min-width: 0;

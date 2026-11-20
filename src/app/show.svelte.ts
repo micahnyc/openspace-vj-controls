@@ -33,6 +33,7 @@ import { Ticker } from '../platform/ticker';
 import { builtInProfiles } from '../profiles';
 import { allBindings, emptyMappingFile, migrateWithWarnings, type MappingFile } from '../presets/schema';
 import { readAutosave, writeAutosave, type FsFileHandle } from '../presets/storage';
+import { neutralsOf } from '../presets/palettes';
 import { saveSettings, settings } from '../settings.svelte';
 
 export interface LearnCapture {
@@ -730,7 +731,8 @@ class Show {
   }
 
   setPalette(p: Palette): void {
-    this.file.palette = { name: p.name, colors: [...p.colors] };
+    // Copy the palette as-is (colors and its grays) into the show file.
+    this.file.palette = { ...p, colors: [...p.colors] };
     this.dirty = true;
   }
 
@@ -741,6 +743,14 @@ class Show {
       if (c) root.setProperty(`--palette-${i + 1}`, c);
       else root.removeProperty(`--palette-${i + 1}`);
     }
+    const n = neutralsOf(p);
+    root.setProperty('--ground', n.ground);
+    root.setProperty('--ink', n.ink);
+    root.setProperty('--panel', n.panel);
+    root.setProperty('--raised', n.raised);
+    root.setProperty('--rule', n.rule);
+    root.setProperty('--line', n.line);
+    root.setProperty('--ink-muted', n.inkMuted);
   }
 
   note(text: string, warn = false): void {

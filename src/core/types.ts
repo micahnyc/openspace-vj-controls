@@ -264,6 +264,12 @@ export interface DeviceEntry {
 export interface Palette {
   name: string;
   colors: string[];
+  /** The panel gray (outlines, panel and dialog fills). Missing = the built-in palette's, else #141714. */
+  panel?: string;
+  /** The raised gray (mapping rows, buttons, inputs). Missing = the built-in palette's, else #1F231F. */
+  raised?: string;
+  /** Text color. Missing = the built-in palette's, else #F0F2EA. */
+  ink?: string;
 }
 
 export const LUA_DELTA_TIME = 'openspace.time.setDeltaTime';

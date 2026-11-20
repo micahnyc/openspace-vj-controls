@@ -1,7 +1,7 @@
 <script lang="ts">
   /** Everything that isn't the show itself: connection, sending, look, logs, debugging tools. */
   import { show } from '../app/show.svelte';
-  import { BUILT_IN_PALETTES } from '../presets/palettes';
+  import { BUILT_IN_PALETTES, neutralsOf } from '../presets/palettes';
   import ConnectionPanel from './components/ConnectionPanel.svelte';
   import SendPanel from './SendPanel.svelte';
   import MidiMonitor from './components/MidiMonitor.svelte';
@@ -47,14 +47,25 @@
     <summary class="label"><span class="title">06 / PALETTE</span>{@render close('palette')}</summary>
     <div class="panel palette">
       {#each BUILT_IN_PALETTES as p}
-        <button type="button" class="pal" aria-pressed={show.file.palette.name === p.name} onclick={() => show.setPalette(p)}>
+        {@const n = neutralsOf(p)}
+        <button
+          type="button"
+          class="pal"
+          aria-pressed={show.file.palette.name === p.name}
+          onclick={() => show.setPalette(p)}
+          style:background={n.ground}
+          style:color={n.ink}
+          style:border-color={show.file.palette.name === p.name ? p.colors[0] : n.line}
+        >
           <span>{p.name.toUpperCase()}</span>
           <span class="sw">
+            <span class="panel-sw" style:background={n.panel} title="Panel {n.panel}"></span>
+            <span class="panel-sw" style:background={n.raised} title="Raised {n.raised}"></span>
             {#each p.colors as c}<span style:background={c}></span>{/each}
           </span>
         </button>
       {/each}
-      <p class="muted small">Saved in the show file. Slots 1–3 color MIDI, BPM and audio; the rest are quick picks for color properties.</p>
+      <p class="muted small">Saved in the show file. Slots 1–3 color MIDI, BPM and audio; the rest are quick picks for color properties. Each palette also sets the page: background, text and every gray. The two wider swatches are its panel and raised grays.</p>
     </div>
   </details>
   {/if}
@@ -103,7 +114,11 @@
     gap: var(--space-2);
   }
   details {
-    background: var(--panel);
+    background: transparent;
+    border: var(--stroke-hair) solid var(--panel);
+  }
+  details :global(.panel) {
+    border: 0;
   }
   summary {
     cursor: pointer;
@@ -138,7 +153,7 @@
     color: var(--ink);
   }
   details[open] > summary {
-    border-bottom: var(--stroke-hair) solid var(--rule);
+    border-bottom: var(--stroke-hair) solid var(--panel);
   }
   .palette {
     display: flex;
@@ -158,6 +173,11 @@
   .sw {
     display: inline-flex;
     gap: 2px;
+  }
+  .sw .panel-sw {
+    width: 18px;
+    outline: var(--stroke-hair) solid var(--line);
+    outline-offset: -1px;
   }
   .sw span {
     width: 10px;

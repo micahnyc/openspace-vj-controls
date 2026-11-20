@@ -52,7 +52,7 @@
     width: min(860px, calc(100vw - 32px));
   }
   dialog::backdrop {
-    background: rgb(10 11 10 / 0.85);
+    background: color-mix(in srgb, var(--ground) 85%, transparent);
   }
   header {
     padding: var(--space-3) var(--space-3) var(--space-2);

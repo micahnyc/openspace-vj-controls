@@ -100,6 +100,10 @@ export function migrateWithWarnings(input: unknown): MigrateResult {
     const colors = file.palette.colors.filter((c): c is string => typeof c === 'string' && /^#[0-9a-f]{6}$/i.test(c));
     if (colors.length >= 4 && colors.length <= 16) {
       palette = { name: typeof file.palette.name === 'string' ? file.palette.name : 'Custom', colors };
+      for (const key of ['panel', 'raised', 'ink'] as const) {
+        const v = file.palette[key];
+        if (typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v)) palette[key] = v;
+      }
     } else warnings.push('The palette needs 4 to 16 colors; the default palette is used instead.');
   }
 
