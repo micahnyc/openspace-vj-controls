@@ -32,6 +32,8 @@ const DB_CEIL = -25;
 
 class AudioInput {
   devices: AudioDevice[] = $state.raw([]);
+  /** True while Chrome hides the input list because the site hasn't been allowed audio yet. */
+  needsPermission = $state(false);
   /** '' = off, SYSTEM_AUDIO, or a device id. */
   source = $state('');
   running = $state(false);
@@ -67,13 +69,30 @@ class AudioInput {
     // Re-list when Windows adds or removes an input (e.g. a virtual cable after install).
     navigator.mediaDevices.ondevicechange ??= () => void this.refreshDevices();
     try {
-      const all = await navigator.mediaDevices.enumerateDevices();
-      this.devices = all
-        .filter((d) => d.kind === 'audioinput')
-        .map((d, i) => ({ id: d.deviceId, label: d.label || `Input ${i + 1} (name hidden until audio is allowed)` }));
+      const inputs = (await navigator.mediaDevices.enumerateDevices()).filter((d) => d.kind === 'audioinput');
+      // Until the site is allowed audio, Chrome hides device ids and names (ids come back empty).
+      this.needsPermission = inputs.length > 0 && inputs.every((d) => !d.deviceId);
+      this.devices = this.needsPermission
+        ? []
+        : inputs.filter((d) => d.deviceId).map((d, i) => ({ id: d.deviceId, label: d.label || `Input ${i + 1}` }));
     } catch {
       this.devices = [];
     }
+  }
+
+  /** Ask Chrome for audio permission (its prompt), then list the real inputs. */
+  async requestPermission(): Promise<void> {
+    this.error = null;
+    try {
+      const s = await navigator.mediaDevices.getUserMedia({ audio: true });
+      for (const t of s.getTracks()) t.stop();
+    } catch (e) {
+      this.error =
+        e instanceof Error && e.name === 'NotAllowedError'
+          ? 'Chrome blocked audio for this site. Click the site settings icon left of the address, set Microphone to Allow, then reload.'
+          : `Couldn't get audio permission: ${e instanceof Error ? e.message : String(e)}`;
+    }
+    await this.refreshDevices();
   }
 
   async start(source: string): Promise<void> {

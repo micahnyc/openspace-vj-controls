@@ -96,11 +96,17 @@
         <select value={audio.source} onchange={onSource}>
           <option value="">Off</option>
           <option value={SYSTEM_AUDIO}>System audio (share dialog)</option>
-          {#each audio.devices as d (d.id)}
+          {#each audio.devices as d, i (d.id + i)}
             <option value={d.id}>{d.label}</option>
           {/each}
         </select>
       </label>
+      {#if audio.needsPermission}
+        <div class="perm">
+          <button type="button" class="primary" onclick={() => audio.requestPermission()}>ALLOW AUDIO INPUTS</button>
+          <span class="muted small">Chrome hides your inputs (Stereo Mix, line-in…) until you allow audio for this site.</span>
+        </div>
+      {/if}
       {#if audio.error}<p class="warn-text small">{audio.error}</p>{/if}
 
       <div class="meters">
@@ -254,6 +260,12 @@
   .small {
     font-size: 13px;
     margin: 0;
+  }
+  .perm {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    flex-wrap: wrap;
   }
   .conf {
     display: grid;
