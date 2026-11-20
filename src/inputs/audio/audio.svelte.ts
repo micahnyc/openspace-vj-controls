@@ -1,9 +1,13 @@
 /**
- * Audio input (spec: "Audio input"). Captures a device or the system mix,
- * analyses it with an AnalyserNode polled from the Web Worker tick, and feeds
- * level/bands, onsets and a BPM estimate to the app.
+ * Audio input (spec: "Audio input"). Captures a device or the system mix.
+ *  - Beat detection: an AudioWorklet measures band energies on the audio
+ *    thread, sample-accurately and evenly spaced, which tempo estimation needs.
+ *  - Meters and EQ sources: an AnalyserNode polled from the Web Worker tick.
+ * If the worklet can't load, beat detection falls back to the analyser.
  */
+import { BandFlux, type BandFrame } from '../../core/bands';
 import { OnsetDetector, OnsetStrength, TempoEstimator, type BpmEstimate } from '../../core/bpm';
+import beatWorkletUrl from './beat.worklet.ts?worker&url';
 import type { EqBand } from '../../core/types';
 
 export interface AudioDevice {
@@ -49,6 +53,11 @@ class AudioInput {
   #strength = new OnsetStrength();
   #detector = new OnsetDetector();
   #tempo = new TempoEstimator();
+  #flux = new BandFlux();
+  #worklet: AudioWorkletNode | null = null;
+  #lastEstimateAudio = 0;
+  /** Which path feeds beat detection (shown in the UI for diagnosis). */
+  beatSource: 'worklet' | 'analyser' | null = $state(null);
   #lastAnalysis = 0;
   #lastEstimate = 0;
   #lastUi = 0;
@@ -109,7 +118,11 @@ class AudioInput {
       this.#time = new Float32Array(analyser.fftSize);
       this.#strength.reset();
       this.#detector.reset();
-      this.#tempo.reset();
+      this.#flux.reset();
+      this.#worklet = await this.#startWorklet(ctx, src);
+      // Frame size of the tempo estimator matches whichever path feeds it.
+      this.#tempo = new TempoEstimator(this.#worklet ? { frameMs: (512 / ctx.sampleRate) * 1000 } : {});
+      this.beatSource = this.#worklet ? 'worklet' : 'analyser';
       this.running = true;
       await this.refreshDevices();
     } catch (e) {
@@ -124,7 +137,54 @@ class AudioInput {
     }
   }
 
+  /** Load the beat worklet; null if the browser can't (falls back to the analyser). */
+  async #startWorklet(ctx: AudioContext, src: MediaStreamAudioSourceNode): Promise<AudioWorkletNode | null> {
+    try {
+      await ctx.audioWorklet.addModule(beatWorkletUrl);
+      const node = new AudioWorkletNode(ctx, 'beat-bands', { numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [1] });
+      node.port.onmessage = (e: MessageEvent<BandFrame[]>) => this.#onFrames(e.data);
+      src.connect(node);
+      // Keep the node pulled by the graph without making any sound.
+      const mute = ctx.createGain();
+      mute.gain.value = 0;
+      node.connect(mute).connect(ctx.destination);
+      return node;
+    } catch (e) {
+      console.warn('Beat worklet unavailable, using the analyser for beat detection:', e);
+      return null;
+    }
+  }
+
+  /** Band frames from the worklet, timestamped on the audio clock. */
+  #onFrames(frames: BandFrame[]): void {
+    const ctx = this.#ctx;
+    if (!ctx) return;
+    // Map audio-clock seconds to performance.now() ms (the tempo clock's time base).
+    const ts = ctx.getOutputTimestamp();
+    const offset = (ts.performanceTime ?? performance.now()) - (ts.contextTime ?? ctx.currentTime) * 1000;
+    for (const f of frames) {
+      const audioMs = f.t * 1000;
+      const strength = this.#flux.feed(f);
+      this.#tempo.feed(strength, audioMs);
+      const perfMs = audioMs + offset;
+      if (this.#detector.feed(strength, perfMs)) {
+        this.onOnset?.(perfMs);
+        this.lastOnset = perfMs;
+      }
+      if (audioMs - this.#lastEstimateAudio >= ESTIMATE_MS) {
+        this.#lastEstimateAudio = audioMs;
+        const est = this.#tempo.estimate(audioMs);
+        this.estimate = est;
+        if (est) this.onEstimate?.(est);
+      }
+    }
+  }
+
   stop(): void {
+    this.#worklet?.port.close();
+    this.#worklet = null;
+    this.beatSource = null;
+    this.#lastEstimateAudio = 0;
     for (const t of this.#stream?.getTracks() ?? []) t.stop();
     this.#stream = null;
     void this.#ctx?.close();
@@ -165,7 +225,15 @@ class AudioInput {
     }
     this.onLevels?.(this.#raw);
 
-    // Onset strength drives both the HIT light (picked onsets) and the tempo estimate.
+    if (this.#worklet) {
+      if (now - this.#lastUi >= UI_MS) {
+        this.#lastUi = now;
+        this.levels = { ...this.#raw };
+      }
+      return; // beat detection runs on the worklet's frames
+    }
+
+    // Fallback: onset strength from the analyser drives the HIT light and the tempo estimate.
     const strength = this.#strength.feed(this.#freq, binHz);
     this.#tempo.feed(strength, now);
     if (this.#detector.feed(strength, now)) {

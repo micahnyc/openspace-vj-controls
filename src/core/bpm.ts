@@ -181,7 +181,9 @@ export class TempoEstimator {
     };
     const score = (bpm: number): number => {
       const lag = 60000 / bpm / frameMs;
-      const harmonic = at(lag) + 0.5 * at(lag * 2) + 0.25 * at(lag * 4);
+      // The true beat repeats at 1, 2, 3 and 4 beats. A 2/3 or 3/2 error (locking onto kick + off-beat)
+      // only lines up at some of these, so it scores lower.
+      const harmonic = (at(lag) + at(lag * 2) + at(lag * 3) + at(lag * 4)) / 4;
       // Dance music sits around 115-150; prefer that octave to avoid half/double-time picks.
       const prior = Math.exp(-0.5 * (Math.log2(bpm / 125) / 0.6) ** 2);
       return harmonic * (0.75 + 0.25 * prior);

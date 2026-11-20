@@ -122,7 +122,7 @@
           AUTO BPM
         </label>
         <span class="readout muted">
-          {#if !audio.running}NO INPUT{:else if audio.estimate}DETECTED {audio.estimate.bpm.toFixed(1)} · {Math.round(audio.estimate.confidence * 100)}%{:else}LISTENING… (NEEDS ~6 S){/if}
+          {#if !audio.running}NO INPUT{:else if audio.estimate}DETECTED {audio.estimate.bpm.toFixed(1)} · {Math.round(audio.estimate.confidence * 100)}%{audio.beatSource === 'analyser' ? ' · FALLBACK' : ''}{:else}LISTENING… (NEEDS ~6 S){/if}
         </span>
       </div>
       {#if settings.autoBpm && audio.running}
