@@ -1,0 +1,275 @@
+{
+  "name": "Neon Flat",
+  "version": 1,
+  "color": {
+    "themes": [
+      {
+        "id": "night",
+        "name": "Night"
+      }
+    ],
+    "tokens": [
+      {
+        "name": "ground",
+        "value": "#0A0B0A",
+        "usage": "Page background. The black everything sits on; never tinted."
+      },
+      {
+        "name": "panel",
+        "value": "#141714",
+        "usage": "Panels and grouped areas (BPM/EQ panel, mappings list) on ground."
+      },
+      {
+        "name": "raised",
+        "value": "#1F231F",
+        "usage": "Inputs, rows, buttons at rest; one step above panel."
+      },
+      {
+        "name": "rule",
+        "value": "#2A2F2A",
+        "usage": "Non-interactive hairline dividers between rows and sections. Decorative only, not for control borders."
+      },
+      {
+        "name": "line",
+        "value": "#6F796F",
+        "usage": "Control borders, focus outlines at rest, meter frames. 3.5:1 or better on ground, panel and raised."
+      },
+      {
+        "name": "ink",
+        "value": "#F0F2EA",
+        "usage": "Primary text and numbers on ground, panel and raised (14:1+)."
+      },
+      {
+        "name": "ink-muted",
+        "value": "#A3AC9F",
+        "usage": "Secondary text, micro-labels, units (6.8:1+ on raised)."
+      },
+      {
+        "name": "palette-1",
+        "value": "#C8FF1A",
+        "usage": "Show palette slot 1, default Acid. Swappable per show; every slot must reach 4.5:1 on raised."
+      },
+      {
+        "name": "palette-2",
+        "value": "#FF2E88",
+        "usage": "Show palette slot 2, default Hot. Swappable per show; every slot must reach 4.5:1 on raised."
+      },
+      {
+        "name": "palette-3",
+        "value": "#1FE5FF",
+        "usage": "Show palette slot 3, default Ice. Swappable per show; every slot must reach 4.5:1 on raised."
+      },
+      {
+        "name": "palette-4",
+        "value": "#A47CFF",
+        "usage": "Show palette slot 4, default Violet. Swappable per show; every slot must reach 4.5:1 on raised."
+      },
+      {
+        "name": "palette-5",
+        "value": "#FFD21A",
+        "usage": "Show palette slot 5, default Sun. Swappable per show; every slot must reach 4.5:1 on raised."
+      },
+      {
+        "name": "palette-6",
+        "value": "#2BFFA8",
+        "usage": "Show palette slot 6, default Mint. Swappable per show; every slot must reach 4.5:1 on raised."
+      },
+      {
+        "name": "palette-7",
+        "value": "#5C9DFF",
+        "usage": "Show palette slot 7, default Blue. Swappable per show; every slot must reach 4.5:1 on raised."
+      },
+      {
+        "name": "palette-8",
+        "value": "#E8E2D0",
+        "usage": "Show palette slot 8, default Bone. Swappable per show; every slot must reach 4.5:1 on raised."
+      },
+      {
+        "name": "midi",
+        "value": "{palette-1}",
+        "usage": "MIDI role: selected tab, primary button, active pad, learn state. Follows palette slot 1."
+      },
+      {
+        "name": "bpm",
+        "value": "{palette-2}",
+        "usage": "BPM role: beat dots, tempo readout, BPM mappings. Follows palette slot 2."
+      },
+      {
+        "name": "audio",
+        "value": "{palette-3}",
+        "usage": "Audio/EQ role: spectrum bars, level meter, EQ mappings. Follows palette slot 3."
+      },
+      {
+        "name": "warn",
+        "value": "#FF6A1A",
+        "usage": "Warnings and danger only: missing targets, panic, disconnected, hazard stripes. FIXED: never part of a show palette. Always with a label or stripes, never color alone."
+      },
+      {
+        "name": "on-accent",
+        "value": "{ground}",
+        "usage": "Text and icons on any palette or warn fill."
+      }
+    ]
+  },
+  "type": {
+    "fonts": [],
+    "families": {
+      "display": "\"Big Shoulders Display\", \"Arial Narrow\", sans-serif",
+      "condensed": "\"Barlow Condensed\", \"Arial Narrow\", sans-serif",
+      "sans": "\"Barlow\", system-ui, sans-serif",
+      "mono": "\"JetBrains Mono\", ui-monospace, monospace"
+    },
+    "groups": [
+      {
+        "name": "Display",
+        "family": "display",
+        "styles": [
+          {
+            "name": "display-xl",
+            "fontSize": "64px",
+            "lineHeight": "0.92",
+            "fontWeight": 800,
+            "letterSpacing": "-0.01em",
+            "sample": "NEON FLAT",
+            "usage": "Screen titles and splash; uppercase."
+          },
+          {
+            "name": "display-m",
+            "fontSize": "32px",
+            "lineHeight": "1",
+            "fontWeight": 800,
+            "sample": "MAPPINGS",
+            "usage": "Panel titles; uppercase."
+          }
+        ]
+      },
+      {
+        "name": "Labels",
+        "family": "condensed",
+        "styles": [
+          {
+            "name": "label",
+            "fontSize": "12px",
+            "lineHeight": "16px",
+            "fontWeight": 600,
+            "letterSpacing": "0.12em",
+            "sample": "01 / MIDI DEVICES",
+            "usage": "Uppercase micro-labels with index numbers; ink-muted."
+          },
+          {
+            "name": "button",
+            "fontSize": "15px",
+            "lineHeight": "20px",
+            "fontWeight": 700,
+            "letterSpacing": "0.06em",
+            "sample": "+ NEW MAPPING",
+            "usage": "Buttons and tabs; uppercase."
+          }
+        ]
+      },
+      {
+        "name": "Text",
+        "family": "sans",
+        "styles": [
+          {
+            "name": "body",
+            "fontSize": "15px",
+            "lineHeight": "22px",
+            "fontWeight": 400,
+            "sample": "Fly to Saturn every 16 beats.",
+            "usage": "Dialog text, property names, help."
+          }
+        ]
+      },
+      {
+        "name": "Readouts",
+        "family": "mono",
+        "styles": [
+          {
+            "name": "readout-xl",
+            "fontSize": "48px",
+            "lineHeight": "1",
+            "fontWeight": 700,
+            "sample": "128.0",
+            "usage": "BPM and delta-time hero numbers; tabular figures."
+          },
+          {
+            "name": "readout",
+            "fontSize": "13px",
+            "lineHeight": "16px",
+            "fontWeight": 500,
+            "sample": "CC 48  CH 01  0.63",
+            "usage": "MIDI addresses, values, ms timer, property URIs."
+          }
+        ]
+      }
+    ]
+  },
+  "spacing": {
+    "tokens": [
+      {
+        "name": "space-1",
+        "value": "4px",
+        "usage": "Gap between meter segments, icon to label."
+      },
+      {
+        "name": "space-2",
+        "value": "8px",
+        "usage": "Inside rows and buttons, between related controls."
+      },
+      {
+        "name": "space-3",
+        "value": "16px",
+        "usage": "Panel padding, gap between rows."
+      },
+      {
+        "name": "space-4",
+        "value": "24px",
+        "usage": "Gap between panels."
+      },
+      {
+        "name": "space-5",
+        "value": "48px",
+        "usage": "Screen margins on large displays."
+      },
+      {
+        "name": "space-6",
+        "value": "96px",
+        "usage": "Hero spacing, cover blocks."
+      }
+    ]
+  },
+  "radius": {
+    "tokens": [
+      {
+        "name": "radius-0",
+        "value": "0px",
+        "usage": "Default: panels, buttons, rows, blocks. Neon Flat is square."
+      },
+      {
+        "name": "radius-1",
+        "value": "2px",
+        "usage": "Meter segments and pads, just enough to read as hardware keys."
+      },
+      {
+        "name": "radius-pill",
+        "value": "999px",
+        "usage": "Status lights and beat dots only."
+      }
+    ]
+  },
+  "stroke": {
+    "tokens": [
+      {
+        "name": "stroke-hair",
+        "value": "1px",
+        "usage": "Rules and control borders."
+      },
+      {
+        "name": "stroke-bold",
+        "value": "2px",
+        "usage": "Focus rings, selected tab underline, active borders."
+      }
+    ]
+  }
+}

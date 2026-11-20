@@ -1,0 +1,229 @@
+/*
+ * Neon Flat tokens (design/neon-flat-tokens.json) as CSS custom properties.
+ * Flat: no gradients, glow, shadows or blur. Square: radius-0 by default.
+ */
+:root {
+  /* Neutrals (fixed) */
+  --ground: #0a0b0a;
+  --panel: #141714;
+  --raised: #1f231f;
+  --rule: #2a2f2a;
+  --line: #6f796f;
+  --ink: #f0f2ea;
+  --ink-muted: #a3ac9f;
+
+  /* Show palette: Acid (default). Slots 1-3 drive the roles. */
+  --palette-1: #c8ff1a;
+  --palette-2: #ff2e88;
+  --palette-3: #1fe5ff;
+  --palette-4: #a47cff;
+  --palette-5: #ffd21a;
+  --palette-6: #2bffa8;
+  --palette-7: #5c9dff;
+  --palette-8: #e8e2d0;
+
+  --midi: var(--palette-1);
+  --bpm: var(--palette-2);
+  --audio: var(--palette-3);
+  --warn: #ff6a1a; /* fixed, never part of a palette */
+  --on-accent: var(--ground);
+
+  /* Type */
+  --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --font-condensed: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-sans: 'Barlow', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 48px;
+  --space-6: 96px;
+
+  /* Radius */
+  --radius-0: 0px;
+  --radius-1: 2px;
+  --radius-pill: 999px;
+
+  /* Stroke */
+  --stroke-hair: 1px;
+  --stroke-bold: 2px;
+
+  --row-h: 40px;
+  --button-h: 36px;
+
+  /* 45° warn/ground stripes, 8px pitch. Hard color stops, not a gradient blend. */
+  --hazard: repeating-linear-gradient(
+    45deg,
+    var(--warn) 0 4px,
+    var(--ground) 4px 8px
+  );
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-radius: var(--radius-0);
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 22px;
+}
+
+/* Type styles */
+.display-xl {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.display-m {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0;
+}
+.label {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.readout {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Controls */
+button,
+.button {
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  height: var(--button-h);
+  padding: 0 var(--space-3);
+  background: var(--raised);
+  color: var(--ink);
+  border: var(--stroke-hair) solid var(--line);
+  cursor: pointer;
+}
+button:hover {
+  border-color: var(--ink);
+}
+button.primary {
+  background: var(--midi);
+  color: var(--on-accent);
+  border-color: var(--midi);
+}
+button[aria-pressed='true'] {
+  background: var(--midi);
+  color: var(--on-accent);
+  border-color: var(--midi);
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='search'],
+select {
+  height: var(--button-h);
+  padding: 0 var(--space-2);
+  background: var(--raised);
+  color: var(--ink);
+  border: var(--stroke-hair) solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+:focus-visible {
+  outline: var(--stroke-bold) solid var(--midi);
+  outline-offset: 1px;
+}
+
+/* Status light: 8px pill dot */
+.light {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--raised);
+  border: var(--stroke-hair) solid var(--line);
+  flex: none;
+}
+.light.on-midi {
+  background: var(--midi);
+  border-color: var(--midi);
+}
+.light.on-audio {
+  background: var(--audio);
+  border-color: var(--audio);
+}
+.light.on-warn {
+  background: var(--warn);
+  border-color: var(--warn);
+}
+
+/* Panel with corner ticks */
+.panel {
+  background: var(--panel);
+  padding: var(--space-3);
+  position: relative;
+  min-width: 0;
+}
+.panel.active::before,
+.panel.active::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 0 solid var(--line);
+}
+.panel.active::before {
+  top: 0;
+  left: 0;
+  border-top-width: var(--stroke-hair);
+  border-left-width: var(--stroke-hair);
+}
+.panel.active::after {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: var(--stroke-hair);
+  border-right-width: var(--stroke-hair);
+}
+
+.hazard-bar {
+  height: 8px;
+  background: var(--hazard);
+}
+
+.muted {
+  color: var(--ink-muted);
+}

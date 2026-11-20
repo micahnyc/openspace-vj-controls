@@ -1,0 +1,1458 @@
+{
+  "profileVersion": 1,
+  "name": "Akai APC40 mkII",
+  "match": [
+    "APC40 mkII",
+    "APC40 mkII MIDI"
+  ],
+  "source": "https://cdn.inmusicbrands.com/akai/attachments/apc40II/APC40Mk2_Communications_Protocol_v1.2.pdf",
+  "init": {
+    "description": "Switch to Mode 2 (Alternate Ableton Live): device knobs not banked by track select, buttons momentary, all LEDs host-controlled. Requires Web MIDI sysex permission.",
+    "sysex": "F0 47 7F 29 60 00 04 42 01 00 00 F7",
+    "verify": "device ID 7F and version bytes"
+  },
+  "encoderModes": {
+    "relative-signed-bit7": "0x00 no change; 0x01-0x3F = +1..+63; 0x40-0x7F = -64..-1"
+  },
+  "defaults": {
+    "slider": "range",
+    "knob": "beatInterval",
+    "encoder": "beatInterval",
+    "pad": "instant",
+    "button": "instant"
+  },
+  "controls": [
+    {
+      "id": "track-fader-1",
+      "label": "Track fader 1",
+      "type": "slider",
+      "kind": "cc",
+      "channel": 1,
+      "number": 7,
+      "mode": "absolute",
+      "group": "faders"
+    },
+    {
+      "id": "track-fader-2",
+      "label": "Track fader 2",
+      "type": "slider",
+      "kind": "cc",
+      "channel": 2,
+      "number": 7,
+      "mode": "absolute",
+      "group": "faders"
+    },
+    {
+      "id": "track-fader-3",
+      "label": "Track fader 3",
+      "type": "slider",
+      "kind": "cc",
+      "channel": 3,
+      "number": 7,
+      "mode": "absolute",
+      "group": "faders"
+    },
+    {
+      "id": "track-fader-4",
+      "label": "Track fader 4",
+      "type": "slider",
+      "kind": "cc",
+      "channel": 4,
+      "number": 7,
+      "mode": "absolute",
+      "group": "faders"
+    },
+    {
+      "id": "track-fader-5",
+      "label": "Track fader 5",
+      "type": "slider",
+      "kind": "cc",
+      "channel": 5,
+      "number": 7,
+      "mode": "absolute",
+      "group": "faders"
+    },
+    {
+      "id": "track-fader-6",
+      "label": "Track fader 6",
+      "type": "slider",
+      "kind": "cc",
+      "channel": 6,
+      "number": 7,
+      "mode": "absolute",
+      "group": "faders"
+    },
+    {
+      "id": "track-fader-7",
+      "label": "Track fader 7",
+      "type": "slider",
+      "kind": "cc",
+      "channel": 7,
+      "number": 7,
+      "mode": "absolute",
+      "group": "faders"
+    },
+    {
+      "id": "track-fader-8",
+      "label": "Track fader 8",
+      "type": "slider",
+      "kind": "cc",
+      "channel": 8,
+      "number": 7,
+      "mode": "absolute",
+      "group": "faders"
+    },
+    {
+      "id": "master-fader",
+      "label": "Master fader",
+      "type": "slider",
+      "kind": "cc",
+      "channel": 1,
+      "number": 14,
+      "mode": "absolute",
+      "group": "faders"
+    },
+    {
+      "id": "crossfader",
+      "label": "Crossfader",
+      "type": "slider",
+      "kind": "cc",
+      "channel": 1,
+      "number": 15,
+      "mode": "absolute",
+      "group": "faders"
+    },
+    {
+      "id": "track-knob-1",
+      "label": "Track knob 1",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 48,
+      "mode": "absolute",
+      "group": "track-knobs",
+      "ledRing": {
+        "cc": 48,
+        "typeCc": 56
+      }
+    },
+    {
+      "id": "track-knob-2",
+      "label": "Track knob 2",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 49,
+      "mode": "absolute",
+      "group": "track-knobs",
+      "ledRing": {
+        "cc": 49,
+        "typeCc": 57
+      }
+    },
+    {
+      "id": "track-knob-3",
+      "label": "Track knob 3",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 50,
+      "mode": "absolute",
+      "group": "track-knobs",
+      "ledRing": {
+        "cc": 50,
+        "typeCc": 58
+      }
+    },
+    {
+      "id": "track-knob-4",
+      "label": "Track knob 4",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 51,
+      "mode": "absolute",
+      "group": "track-knobs",
+      "ledRing": {
+        "cc": 51,
+        "typeCc": 59
+      }
+    },
+    {
+      "id": "track-knob-5",
+      "label": "Track knob 5",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 52,
+      "mode": "absolute",
+      "group": "track-knobs",
+      "ledRing": {
+        "cc": 52,
+        "typeCc": 60
+      }
+    },
+    {
+      "id": "track-knob-6",
+      "label": "Track knob 6",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 53,
+      "mode": "absolute",
+      "group": "track-knobs",
+      "ledRing": {
+        "cc": 53,
+        "typeCc": 61
+      }
+    },
+    {
+      "id": "track-knob-7",
+      "label": "Track knob 7",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 54,
+      "mode": "absolute",
+      "group": "track-knobs",
+      "ledRing": {
+        "cc": 54,
+        "typeCc": 62
+      }
+    },
+    {
+      "id": "track-knob-8",
+      "label": "Track knob 8",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 55,
+      "mode": "absolute",
+      "group": "track-knobs",
+      "ledRing": {
+        "cc": 55,
+        "typeCc": 63
+      }
+    },
+    {
+      "id": "device-knob-1",
+      "label": "Device knob 1",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 16,
+      "mode": "absolute",
+      "group": "device-knobs",
+      "ledRing": {
+        "cc": 16,
+        "typeCc": 24
+      }
+    },
+    {
+      "id": "device-knob-2",
+      "label": "Device knob 2",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 17,
+      "mode": "absolute",
+      "group": "device-knobs",
+      "ledRing": {
+        "cc": 17,
+        "typeCc": 25
+      }
+    },
+    {
+      "id": "device-knob-3",
+      "label": "Device knob 3",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 18,
+      "mode": "absolute",
+      "group": "device-knobs",
+      "ledRing": {
+        "cc": 18,
+        "typeCc": 26
+      }
+    },
+    {
+      "id": "device-knob-4",
+      "label": "Device knob 4",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 19,
+      "mode": "absolute",
+      "group": "device-knobs",
+      "ledRing": {
+        "cc": 19,
+        "typeCc": 27
+      }
+    },
+    {
+      "id": "device-knob-5",
+      "label": "Device knob 5",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 20,
+      "mode": "absolute",
+      "group": "device-knobs",
+      "ledRing": {
+        "cc": 20,
+        "typeCc": 28
+      }
+    },
+    {
+      "id": "device-knob-6",
+      "label": "Device knob 6",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 21,
+      "mode": "absolute",
+      "group": "device-knobs",
+      "ledRing": {
+        "cc": 21,
+        "typeCc": 29
+      }
+    },
+    {
+      "id": "device-knob-7",
+      "label": "Device knob 7",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 22,
+      "mode": "absolute",
+      "group": "device-knobs",
+      "ledRing": {
+        "cc": 22,
+        "typeCc": 30
+      }
+    },
+    {
+      "id": "device-knob-8",
+      "label": "Device knob 8",
+      "type": "knob",
+      "kind": "cc",
+      "channel": 1,
+      "number": 23,
+      "mode": "absolute",
+      "group": "device-knobs",
+      "ledRing": {
+        "cc": 23,
+        "typeCc": 31
+      }
+    },
+    {
+      "id": "tempo-knob",
+      "label": "Tempo knob",
+      "type": "encoder",
+      "kind": "cc",
+      "channel": 1,
+      "number": 13,
+      "mode": "relative-signed-bit7",
+      "group": "transport"
+    },
+    {
+      "id": "cue-knob",
+      "label": "Cue level knob",
+      "type": "encoder",
+      "kind": "cc",
+      "channel": 1,
+      "number": 47,
+      "mode": "relative-signed-bit7",
+      "group": "transport"
+    },
+    {
+      "id": "pad-0",
+      "label": "Clip pad 0",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 0,
+      "group": "clip-grid",
+      "grid": {
+        "row": 0,
+        "col": 0
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-1",
+      "label": "Clip pad 1",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 1,
+      "group": "clip-grid",
+      "grid": {
+        "row": 0,
+        "col": 1
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-2",
+      "label": "Clip pad 2",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 2,
+      "group": "clip-grid",
+      "grid": {
+        "row": 0,
+        "col": 2
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-3",
+      "label": "Clip pad 3",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 3,
+      "group": "clip-grid",
+      "grid": {
+        "row": 0,
+        "col": 3
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-4",
+      "label": "Clip pad 4",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 4,
+      "group": "clip-grid",
+      "grid": {
+        "row": 0,
+        "col": 4
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-5",
+      "label": "Clip pad 5",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 5,
+      "group": "clip-grid",
+      "grid": {
+        "row": 0,
+        "col": 5
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-6",
+      "label": "Clip pad 6",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 6,
+      "group": "clip-grid",
+      "grid": {
+        "row": 0,
+        "col": 6
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-7",
+      "label": "Clip pad 7",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 7,
+      "group": "clip-grid",
+      "grid": {
+        "row": 0,
+        "col": 7
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-8",
+      "label": "Clip pad 8",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 8,
+      "group": "clip-grid",
+      "grid": {
+        "row": 1,
+        "col": 0
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-9",
+      "label": "Clip pad 9",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 9,
+      "group": "clip-grid",
+      "grid": {
+        "row": 1,
+        "col": 1
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-10",
+      "label": "Clip pad 10",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 10,
+      "group": "clip-grid",
+      "grid": {
+        "row": 1,
+        "col": 2
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-11",
+      "label": "Clip pad 11",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 11,
+      "group": "clip-grid",
+      "grid": {
+        "row": 1,
+        "col": 3
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-12",
+      "label": "Clip pad 12",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 12,
+      "group": "clip-grid",
+      "grid": {
+        "row": 1,
+        "col": 4
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-13",
+      "label": "Clip pad 13",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 13,
+      "group": "clip-grid",
+      "grid": {
+        "row": 1,
+        "col": 5
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-14",
+      "label": "Clip pad 14",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 14,
+      "group": "clip-grid",
+      "grid": {
+        "row": 1,
+        "col": 6
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-15",
+      "label": "Clip pad 15",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 15,
+      "group": "clip-grid",
+      "grid": {
+        "row": 1,
+        "col": 7
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-16",
+      "label": "Clip pad 16",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 16,
+      "group": "clip-grid",
+      "grid": {
+        "row": 2,
+        "col": 0
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-17",
+      "label": "Clip pad 17",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 17,
+      "group": "clip-grid",
+      "grid": {
+        "row": 2,
+        "col": 1
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-18",
+      "label": "Clip pad 18",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 18,
+      "group": "clip-grid",
+      "grid": {
+        "row": 2,
+        "col": 2
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-19",
+      "label": "Clip pad 19",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 19,
+      "group": "clip-grid",
+      "grid": {
+        "row": 2,
+        "col": 3
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-20",
+      "label": "Clip pad 20",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 20,
+      "group": "clip-grid",
+      "grid": {
+        "row": 2,
+        "col": 4
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-21",
+      "label": "Clip pad 21",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 21,
+      "group": "clip-grid",
+      "grid": {
+        "row": 2,
+        "col": 5
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-22",
+      "label": "Clip pad 22",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 22,
+      "group": "clip-grid",
+      "grid": {
+        "row": 2,
+        "col": 6
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-23",
+      "label": "Clip pad 23",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 23,
+      "group": "clip-grid",
+      "grid": {
+        "row": 2,
+        "col": 7
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-24",
+      "label": "Clip pad 24",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 24,
+      "group": "clip-grid",
+      "grid": {
+        "row": 3,
+        "col": 0
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-25",
+      "label": "Clip pad 25",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 25,
+      "group": "clip-grid",
+      "grid": {
+        "row": 3,
+        "col": 1
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-26",
+      "label": "Clip pad 26",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 26,
+      "group": "clip-grid",
+      "grid": {
+        "row": 3,
+        "col": 2
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-27",
+      "label": "Clip pad 27",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 27,
+      "group": "clip-grid",
+      "grid": {
+        "row": 3,
+        "col": 3
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-28",
+      "label": "Clip pad 28",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 28,
+      "group": "clip-grid",
+      "grid": {
+        "row": 3,
+        "col": 4
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-29",
+      "label": "Clip pad 29",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 29,
+      "group": "clip-grid",
+      "grid": {
+        "row": 3,
+        "col": 5
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-30",
+      "label": "Clip pad 30",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 30,
+      "group": "clip-grid",
+      "grid": {
+        "row": 3,
+        "col": 6
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-31",
+      "label": "Clip pad 31",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 31,
+      "group": "clip-grid",
+      "grid": {
+        "row": 3,
+        "col": 7
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-32",
+      "label": "Clip pad 32",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 32,
+      "group": "clip-grid",
+      "grid": {
+        "row": 4,
+        "col": 0
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-33",
+      "label": "Clip pad 33",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 33,
+      "group": "clip-grid",
+      "grid": {
+        "row": 4,
+        "col": 1
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-34",
+      "label": "Clip pad 34",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 34,
+      "group": "clip-grid",
+      "grid": {
+        "row": 4,
+        "col": 2
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-35",
+      "label": "Clip pad 35",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 35,
+      "group": "clip-grid",
+      "grid": {
+        "row": 4,
+        "col": 3
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-36",
+      "label": "Clip pad 36",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 36,
+      "group": "clip-grid",
+      "grid": {
+        "row": 4,
+        "col": 4
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-37",
+      "label": "Clip pad 37",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 37,
+      "group": "clip-grid",
+      "grid": {
+        "row": 4,
+        "col": 5
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-38",
+      "label": "Clip pad 38",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 38,
+      "group": "clip-grid",
+      "grid": {
+        "row": 4,
+        "col": 6
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "pad-39",
+      "label": "Clip pad 39",
+      "type": "pad",
+      "kind": "note",
+      "channel": 1,
+      "number": 39,
+      "group": "clip-grid",
+      "grid": {
+        "row": 4,
+        "col": 7
+      },
+      "led": "rgb"
+    },
+    {
+      "id": "scene-1",
+      "label": "Scene launch 1",
+      "type": "button",
+      "kind": "note",
+      "channel": 1,
+      "number": 82,
+      "group": "scene"
+    },
+    {
+      "id": "scene-2",
+      "label": "Scene launch 2",
+      "type": "button",
+      "kind": "note",
+      "channel": 1,
+      "number": 83,
+      "group": "scene"
+    },
+    {
+      "id": "scene-3",
+      "label": "Scene launch 3",
+      "type": "button",
+      "kind": "note",
+      "channel": 1,
+      "number": 84,
+      "group": "scene"
+    },
+    {
+      "id": "scene-4",
+      "label": "Scene launch 4",
+      "type": "button",
+      "kind": "note",
+      "channel": 1,
+      "number": 85,
+      "group": "scene"
+    },
+    {
+      "id": "scene-5",
+      "label": "Scene launch 5",
+      "type": "button",
+      "kind": "note",
+      "channel": 1,
+      "number": 86,
+      "group": "scene"
+    },
+    {
+      "id": "record-arm-1",
+      "label": "Record Arm 1",
+      "type": "button",
+      "kind": "note",
+      "channel": 1,
+      "number": 48,
+      "group": "record-arm"
+    },
+    {
+      "id": "record-arm-2",
+      "label": "Record Arm 2",
+      "type": "button",
+      "kind": "note",
+      "channel": 2,
+      "number": 48,
+      "group": "record-arm"
+    },
+    {
+      "id": "record-arm-3",
+      "label": "Record Arm 3",
+      "type": "button",
+      "kind": "note",
+      "channel": 3,
+      "number": 48,
+      "group": "record-arm"
+    },
+    {
+      "id": "record-arm-4",
+      "label": "Record Arm 4",
+      "type": "button",
+      "kind": "note",
+      "channel": 4,
+      "number": 48,
+      "group": "record-arm"
+    },
+    {
+      "id": "record-arm-5",
+      "label": "Record Arm 5",
+      "type": "button",
+      "kind": "note",
+      "channel": 5,
+      "number": 48,
+      "group": "record-arm"
+    },
+    {
+      "id": "record-arm-6",
+      "label": "Record Arm 6",
+      "type": "button",
+      "kind": "note",
+      "channel": 6,
+      "number": 48,
+      "group": "record-arm"
+    },
+    {
+      "id": "record-arm-7",
+      "label": "Record Arm 7",
+      "type": "button",
+      "kind": "note",
+      "channel": 7,
+      "number": 48,
+      "group": "record-arm"
+    },
+    {
+      "id": "record-arm-8",
+      "label": "Record Arm 8",
+      "type": "button",
+      "kind": "note",
+      "channel": 8,
+      "number": 48,
+      "group": "record-arm"
+    },
+    {
+      "id": "solo-1",
+      "label": "Solo 1",
+      "type": "button",
+      "kind": "note",
+      "channel": 1,
+      "number": 49,
+      "group": "solo"
+    },
+    {
+      "id": "solo-2",
+      "label": "Solo 2",
+      "type": "button",
+      "kind": "note",
+      "channel": 2,
+      "number": 49,
+      "group": "solo"
+    },
+    {
+      "id": "solo-3",
+      "label": "Solo 3",
+      "type": "button",
+      "kind": "note",
+      "channel": 3,
+      "number": 49,
+      "group": "solo"
+    },
+    {
+      "id": "solo-4",
+      "label": "Solo 4",
+      "type": "button",
+      "kind": "note",
+      "channel": 4,
+      "number": 49,
+      "group": "solo"
+    },
+    {
+      "id": "solo-5",
+      "label": "Solo 5",
+      "type": "button",
+      "kind": "note",
+      "channel": 5,
+      "number": 49,
+      "group": "solo"
+    },
+    {
+      "id": "solo-6",
+      "label": "Solo 6",
+      "type": "button",
+      "kind": "note",
+      "channel": 6,
+      "number": 49,
+      "group": "solo"
+    },
+    {
+      "id": "solo-7",
+      "label": "Solo 7",
+      "type": "button",
+      "kind": "note",
+      "channel": 7,
+      "number": 49,
+      "group": "solo"
+    },
+    {
+      "id": "solo-8",
+      "label": "Solo 8",
+      "type": "button",
+      "kind": "note",
+      "channel": 8,
+      "number": 49,
+      "group": "solo"
+    },
+    {
+      "id": "activator-1",
+      "label": "Activator 1",
+      "type": "button",
+      "kind": "note",
+      "channel": 1,
+      "number": 50,
+      "group": "activator"
+    },
+    {
+      "id": "activator-2",
+      "label": "Activator 2",
+      "type": "button",
+      "kind": "note",
+      "channel": 2,
+      "number": 50,
+      "group": "activator"
+    },
+    {
+      "id": "activator-3",
+      "label": "Activator 3",
+      "type": "button",
+      "kind": "note",
+      "channel": 3,
+      "number": 50,
+      "group": "activator"
+    },
+    {
+      "id": "activator-4",
+      "label": "Activator 4",
+      "type": "button",
+      "kind": "note",
+      "channel": 4,
+      "number": 50,
+      "group": "activator"
+    },
+    {
+      "id": "activator-5",
+      "label": "Activator 5",
+      "type": "button",
+      "kind": "note",
+      "channel": 5,
+      "number": 50,
+      "group": "activator"
+    },
+    {
+      "id": "activator-6",
+      "label": "Activator 6",
+      "type": "button",
+      "kind": "note",
+      "channel": 6,
+      "number": 50,
+      "group": "activator"
+    },
+    {
+      "id": "activator-7",
+      "label": "Activator 7",
+      "type": "button",
+      "kind": "note",
+      "channel": 7,
+      "number": 50,
+      "group": "activator"
+    },
+    {
+      "id": "activator-8",
+      "label": "Activator 8",
+      "type": "button",
+      "kind": "note",
+      "channel": 8,
+      "number": 50,
+      "group": "activator"
+    },
+    {
+      "id": "track-select-1",
+      "label": "Track Select 1",
+      "type": "button",
+      "kind": "note",
+      "channel": 1,
+      "number": 51,
+      "group": "track-select"
+    },
+    {
+      "id": "track-select-2",
+      "label": "Track Select 2",
+      "type": "button",
+      "kind": "note",
+      "channel": 2,
+      "number": 51,
+      "group": "track-select"
+    },
+    {
+      "id": "track-select-3",
+      "label": "Track Select 3",
+      "type": "button",
+      "kind": "note",
+      "channel": 3,
+      "number": 51,
+      "group": "track-select"
+    },
+    {
+      "id": "track-select-4",
+      "label": "Track Select 4",
+      "type": "button",
+      "kind": "note",
+      "channel": 4,
+      "number": 51,
+      "group": "track-select"
+    },
+    {
+      "id": "track-select-5",
+      "label": "Track Select 5",
+      "type": "button",
+      "kind": "note",
+      "channel": 5,
+      "number": 51,
+      "group": "track-select"
+    },
+    {
+      "id": "track-select-6",
+      "label": "Track Select 6",
+      "type": "button",
+      "kind": "note",
+      "channel": 6,
+      "number": 51,
+      "group": "track-select"
+    },
+    {
+      "id": "track-select-7",
+      "label": "Track Select 7",
+      "type": "button",
+      "kind": "note",
+      "channel": 7,
+      "number": 51,
+      "group": "track-select"
+    },
+    {
+      "id": "track-select-8",
+      "label": "Track Select 8",
+      "type": "button",
+      "kind": "note",
+      "channel": 8,
+      "number": 51,
+      "group": "track-select"
+    },
+    {
+      "id": "clip-stop-1",
+      "label": "Clip Stop 1",
+      "type": "button",
+      "kind": "note",
+      "channel": 1,
+      "number": 52,
+      "group": "clip-stop"
+    },
+    {
+      "id": "clip-stop-2",
+      "label": "Clip Stop 2",
+      "type": "button",
+      "kind": "note",
+      "channel": 2,
+      "number": 52,
+      "group": "clip-stop"
+    },
+    {
+      "id": "clip-stop-3",
+      "label": "Clip Stop 3",
+      "type": "button",
+      "kind": "note",
+      "channel": 3,
+      "number": 52,
+      "group": "clip-stop"
+    },
+    {
+      "id": "clip-stop-4",
+      "label": "Clip Stop 4",
+      "type": "button",
+      "kind": "note",
+      "channel": 4,
+      "number": 52,
+      "group": "clip-stop"
+    },
+    {
+      "id": "clip-stop-5",
+      "label": "Clip Stop 5",
+      "type": "button",
+      "kind": "note",
+      "channel": 5,
+      "number": 52,
+      "group": "clip-stop"
+    },
+    {
+      "id": "clip-stop-6",
+      "label": "Clip Stop 6",
+      "type": "button",
+      "kind": "note",
+      "channel": 6,
+      "number": 52,
+      "group": "clip-stop"
+    },
+    {
+      "id": "clip-stop-7",
+      "label": "Clip Stop 7",
+      "type": "button",
+      "kind": "note",
+      "channel": 7,
+      "number": 52,
+      "group": "clip-stop"
+    },
+    {
+      "id": "clip-stop-8",
+      "label": "Clip Stop 8",
+      "type": "button",
+      "kind": "note",
+      "channel": 8,
+      "number": 52,
+      "group": "clip-stop"
+    },
+    {
+      "id": "ab-assign-1",
+      "label": "A|B assign 1",
+      "type": "selector",
+      "kind": "note",
+      "channel": 1,
+      "number": 66,
+      "group": "crossfade-assign",
+      "states": [
+        "off",
+        "A",
+        "B"
+      ],
+      "verify": "Generic mode: the APC40 cycles off/A/B itself (velocity 1 = A, 2 = B, note off = off). Check whether Mode 2 makes it momentary."
+    },
+    {
+      "id": "ab-assign-2",
+      "label": "A|B assign 2",
+      "type": "selector",
+      "kind": "note",
+      "channel": 2,
+      "number": 66,
+      "group": "crossfade-assign",
+      "states": [
+        "off",
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "ab-assign-3",
+      "label": "A|B assign 3",
+      "type": "selector",
+      "kind": "note",
+      "channel": 3,
+      "number": 66,
+      "group": "crossfade-assign",
+      "states": [
+        "off",
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "ab-assign-4",
+      "label": "A|B assign 4",
+      "type": "selector",
+      "kind": "note",
+      "channel": 4,
+      "number": 66,
+      "group": "crossfade-assign",
+      "states": [
+        "off",
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "ab-assign-5",
+      "label": "A|B assign 5",
+      "type": "selector",
+      "kind": "note",
+      "channel": 5,
+      "number": 66,
+      "group": "crossfade-assign",
+      "states": [
+        "off",
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "ab-assign-6",
+      "label": "A|B assign 6",
+      "type": "selector",
+      "kind": "note",
+      "channel": 6,
+      "number": 66,
+      "group": "crossfade-assign",
+      "states": [
+        "off",
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "ab-assign-7",
+      "label": "A|B assign 7",
+      "type": "selector",
+      "kind": "note",
+      "channel": 7,
+      "number": 66,
+      "group": "crossfade-assign",
+      "states": [
+        "off",
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "ab-assign-8",
+      "label": "A|B assign 8",
+      "type": "selector",
+      "kind": "note",
+      "channel": 8,
+      "number": 66,
+      "group": "crossfade-assign",
+      "states": [
+        "off",
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "footswitch",
+      "label": "Footswitch",
+      "type": "button",
+      "kind": "cc",
+      "channel": 1,
+      "number": 64,
+      "mode": "absolute",
+      "group": "transport"
+    }
+  ]
+}
