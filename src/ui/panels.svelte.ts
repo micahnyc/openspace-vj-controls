@@ -1,11 +1,14 @@
 /**
- * Which system panels (04-09) are shown and expanded. Hidden panels are
+ * Which page sections (01-09) are shown and expanded. Hidden panels are
  * remembered per browser (a viewer convenience, not part of the show file).
  */
 import { tick } from 'svelte';
 import { saveSettings, settings } from '../settings.svelte';
 
 export const PANELS = [
+  { id: 'system', index: '01', title: 'SYSTEM' },
+  { id: 'tempo', index: '02', title: 'TEMPO & EQ' },
+  { id: 'mappings', index: '03', title: 'MAPPINGS' },
   { id: 'openspace', index: '04', title: 'OPENSPACE' },
   { id: 'sending', index: '05', title: 'SENDING & DEBUG' },
   { id: 'palette', index: '06', title: 'PALETTE' },
@@ -19,6 +22,9 @@ export type PanelId = (typeof PANELS)[number]['id'];
 class Panels {
   /** Expanded (open) state of each shown panel. */
   expanded: Record<PanelId, boolean> = $state({
+    system: true,
+    tempo: true,
+    mappings: true,
     openspace: true,
     sending: false,
     palette: false,

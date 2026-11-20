@@ -6,12 +6,10 @@
   import { canOverwrite, openFile, saveFile, type FsFileHandle } from '../presets/storage';
 
   interface Props {
-    onnew: (kind: 'midi' | 'bpm' | 'eq') => void;
     onload: (pending: { file: MappingFile; handle: FsFileHandle | null; name: string; warnings: string[] }) => void;
   }
-  let { onnew, onload }: Props = $props();
+  let { onload }: Props = $props();
 
-  let menu = $state(false);
   let error: string | null = $state(null);
 
   async function save(saveAs: boolean) {
@@ -48,15 +46,11 @@
     }
   }
 
-  function pick(kind: 'midi' | 'bpm' | 'eq') {
-    menu = false;
-    onnew(kind);
-  }
 </script>
 
 <section class="bar" aria-label="Devices and file">
   <div class="devices">
-    <span class="label">01 / MIDI DEVICES</span>
+    <span class="label">MIDI DEVICES</span>
     <div class="chips">
       {#if midi.status === 'unsupported'}
         <span class="warn-text">This browser has no Web MIDI. Use Chrome.</span>
@@ -99,16 +93,6 @@
     </div>
   </div>
 
-  <div class="new">
-    <button type="button" class="primary" aria-expanded={menu} onclick={() => (menu = !menu)}>+ NEW MAPPING</button>
-    {#if menu}
-      <div class="menu" role="menu">
-        <button type="button" role="menuitem" onclick={() => pick('midi')}>MIDI MAPPING</button>
-        <button type="button" role="menuitem" onclick={() => pick('bpm')}>BPM MAPPING</button>
-        <button type="button" role="menuitem" onclick={() => pick('eq')}>EQ MAPPING</button>
-      </div>
-    {/if}
-  </div>
 </section>
 {#if error}
   <p class="error" role="alert"><strong class="label">FILE</strong> {error}</p>
@@ -152,28 +136,6 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     color: var(--ink-muted);
-  }
-  .new {
-    position: relative;
-  }
-  .menu {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 4px);
-    z-index: 10;
-    display: grid;
-    min-width: 200px;
-    background: var(--panel);
-    border: var(--stroke-hair) solid var(--line);
-  }
-  .menu button {
-    border: 0;
-    border-bottom: var(--stroke-hair) solid var(--rule);
-    text-align: left;
-    background: var(--panel);
-  }
-  .menu button:hover {
-    background: var(--raised);
   }
   .small {
     font-size: 11px;

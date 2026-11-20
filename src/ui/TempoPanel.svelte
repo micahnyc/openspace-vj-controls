@@ -56,11 +56,7 @@
   });
 </script>
 
-<section class="panel" aria-labelledby="tempo-title">
-  <div class="head">
-    <span class="label" id="tempo-title">02 / TEMPO &amp; EQ</span>
-    <span class="readout muted">{show.tempoSource.toUpperCase()}</span>
-  </div>
+<section class="panel" aria-label="Tempo and EQ">
 
   <div class="grid">
     <div class="tempo">
@@ -179,11 +175,6 @@
 </section>
 
 <style>
-  .head {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--space-2);
-  }
   .grid {
     display: grid;
     grid-template-columns: auto 1fr;

@@ -5,6 +5,12 @@
   import { audio } from '../inputs/audio/audio.svelte';
   import { settings } from '../settings.svelte';
   import { PANELS, panels } from './panels.svelte';
+  import NewMappingButton from './NewMappingButton.svelte';
+
+  interface Props {
+    onnew: (kind: 'midi' | 'bpm' | 'eq') => void;
+  }
+  let { onnew }: Props = $props();
 
   /** Menu opens on hover, keyboard focus, or a click (touch). */
   let menuOpen = $state(false);
@@ -79,6 +85,7 @@
     </span>
   </div>
   <div class="panic-wrap">
+    <NewMappingButton {onnew} />
     {#if show.hold}
       <button type="button" class="release" onclick={() => show.releaseHold()}>RELEASE HOLD</button>
     {/if}

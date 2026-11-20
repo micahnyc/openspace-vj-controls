@@ -10,6 +10,7 @@
   import MappingDialog from './ui/MappingDialog.svelte';
   import LoadDialog from './ui/LoadDialog.svelte';
   import SystemPanel from './ui/SystemPanel.svelte';
+  import Window from './ui/components/Window.svelte';
 
   show.init();
 
@@ -22,14 +23,20 @@
   }
 </script>
 
-<Header />
+<Header onnew={(kind) => (dialog = { kind, editing: null })} />
 
 <main class="layout">
-  <TopBar onnew={(kind) => (dialog = { kind, editing: null })} onload={(p) => (pendingLoad = p)} />
-  <div class="top">
+  <Window id="system">
+    <TopBar onload={(p) => (pendingLoad = p)} />
+  </Window>
+  <Window id="tempo">
+    {#snippet meta()}<span class="readout muted">{show.tempoSource.toUpperCase()}</span>{/snippet}
     <TempoPanel />
-  </div>
-  <MappingsList onedit={edit} />
+  </Window>
+  <Window id="mappings">
+    {#snippet meta()}<span class="readout muted">{show.bindings.length} TOTAL</span>{/snippet}
+    <MappingsList onedit={edit} />
+  </Window>
   <SystemPanel />
 </main>
 
@@ -45,7 +52,7 @@
 <style>
   .layout {
     display: grid;
-    gap: var(--space-4);
+    gap: var(--space-2);
     padding: var(--space-4);
     max-width: 1600px;
   }

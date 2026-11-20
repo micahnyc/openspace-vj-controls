@@ -57,11 +57,7 @@
   }
 </script>
 
-<section class="panel active" aria-labelledby="map-title">
-  <div class="head">
-    <span class="label" id="map-title">03 / MAPPINGS</span>
-    <span class="readout muted">{show.bindings.length} TOTAL</span>
-  </div>
+<section class="panel" aria-label="Mappings">
 
   <div class="tabs" role="tablist">
     {#each deviceTabs as t (t.alias)}
@@ -81,7 +77,7 @@
       {tab === BEAT_TAB
         ? 'No BPM or EQ mappings yet. Press + NEW MAPPING and choose BPM or EQ.'
         : deviceTabs.length === 0
-          ? 'Select a MIDI device above, then press + NEW MAPPING.'
+          ? 'Select a MIDI device in 01 / SYSTEM, then press + NEW MAPPING.'
           : 'No mappings on this device yet. Press + NEW MAPPING.'}
     </p>
   {:else}
@@ -128,11 +124,6 @@
 </section>
 
 <style>
-  .head {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--space-2);
-  }
   .tabs {
     display: flex;
     flex-wrap: wrap;
