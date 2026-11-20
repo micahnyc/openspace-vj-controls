@@ -34,6 +34,6 @@ The app makes no third-party requests: fonts (Barlow, Barlow Condensed, Big Shou
 
 Pick an input under **Tempo & EQ**. Options on Windows, best first for shows:
 
-1. **Stereo Mix** (Realtek): copies what plays on the speakers, no latency, reopened automatically. On some drivers it only follows the *Speakers* output, not *Headphones*.
+1. **Stereo Mix** (Realtek): copies what plays on the speakers, no latency; one click to use it again next time (audio never starts on its own). On some drivers it only follows the *Speakers* output, not *Headphones*.
 2. **System audio (share dialog)**: works with any output; Chrome asks each session.
 3. **Voicemeeter** or a hardware **line-in** from the mixer.

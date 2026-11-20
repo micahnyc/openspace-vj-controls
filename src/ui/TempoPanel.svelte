@@ -25,6 +25,24 @@
     editing = false;
   }
 
+  /** Name of the input used last time, if Chrome still lists it (or the name is hidden pending permission). */
+  const lastInput = $derived.by(() => {
+    const id = settings.audioSource;
+    if (!id) return null;
+    if (audio.needsPermission) return 'last input';
+    return audio.devices.find((d) => d.id === id)?.label ?? null;
+  });
+
+  async function useLast() {
+    if (audio.needsPermission) await audio.requestPermission();
+    if (audio.devices.some((d) => d.id === settings.audioSource)) void audio.start(settings.audioSource);
+  }
+
+  function stopAudio() {
+    audio.stop();
+    audio.source = '';
+  }
+
   function onSource(e: Event & { currentTarget: HTMLSelectElement }) {
     const source = e.currentTarget.value;
     // Remember device inputs; the system-audio share always needs a fresh click.
@@ -101,10 +119,20 @@
           {/each}
         </select>
       </label>
-      {#if audio.needsPermission}
+      {#if audio.running}
+        <div class="perm">
+          <button type="button" onclick={stopAudio}>STOP AUDIO</button>
+          <span class="muted small">Capturing now. Nothing is recorded or sent anywhere.</span>
+        </div>
+      {:else if lastInput}
+        <div class="perm">
+          <button type="button" class="primary" onclick={useLast}>USE {lastInput.toUpperCase()} AGAIN</button>
+          <span class="muted small">Audio only starts when you click.</span>
+        </div>
+      {:else if audio.needsPermission}
         <div class="perm">
           <button type="button" class="primary" onclick={() => audio.requestPermission()}>ALLOW AUDIO INPUTS</button>
-          <span class="muted small">Chrome hides your inputs (Stereo Mix, line-in…) until you allow audio for this site.</span>
+          <span class="muted small">Chrome hides your inputs (Stereo Mix, line-in…) until you allow audio for this site. This only asks; nothing starts.</span>
         </div>
       {/if}
       {#if audio.error}<p class="warn-text small">{audio.error}</p>{/if}

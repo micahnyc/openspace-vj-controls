@@ -20,7 +20,7 @@ export interface Settings {
   autoBpm: boolean;
   /** Minimum detector confidence before it may change the BPM. */
   bpmConfidence: number;
-  /** Audio input device id to reopen on load ('' = off). System-audio share is never reopened: Chrome needs a click for it. */
+  /** Last audio input device used ('' = none), offered as a one-click "use again". Never opened automatically. */
   audioSource: string;
   /** System panels (04-09) the user closed. */
   hiddenPanels: string[];

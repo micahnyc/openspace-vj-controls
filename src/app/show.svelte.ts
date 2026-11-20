@@ -178,7 +178,6 @@ class Show {
 
     connection.start(settings.host, settings.port);
     void midi.request();
-    void this.#reopenAudio();
 
     $effect(() => {
       // Re-index whenever mappings change; snapshot so the hot path never touches proxies.
@@ -243,19 +242,6 @@ class Show {
     window.addEventListener('pagehide', () => {
       for (const d of this.devices) if (d.active && d.known && d.connected) this.#clearLeds(d.name, d.profile);
     });
-  }
-
-  /** Reopen the audio input used last time, if it is still there. */
-  async #reopenAudio(): Promise<void> {
-    const id = settings.audioSource;
-    if (!id) return;
-    await audio.refreshDevices();
-    if (!audio.devices.some((d) => d.id === id)) {
-      this.note('The audio input used last time is not available. Pick one in TEMPO & EQ.', true);
-      return;
-    }
-    await audio.start(id);
-    if (audio.running) this.note(`Audio input reopened: ${audio.devices.find((d) => d.id === id)?.label ?? id}.`);
   }
 
   applySendSettings(): void {
